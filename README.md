@@ -15,7 +15,9 @@ Techniques
 Backend: Java Server Faces framework on Glassfish, Frontend: PrimeFaces library, Database: MySql
 ![techniques](/imgs/stack.png)
 
+<br/>
 Model: MVC
+<br/>
 ![code](imgs/Picture1.png)
 <br/>
 
