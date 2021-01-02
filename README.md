@@ -1,4 +1,3 @@
-![](imgs/logo.png)
 # Cloud Drive
 
 <p>This website includes 3 main systems:  Storage system, User Registration, File System and File System. </p>
@@ -95,11 +94,21 @@ Web APIS
 Preview
 ------------
 User Register
+<br/>
 ![register](imgs/register.png)
+<br/>
 ![login](imgs/login.png)
+<br/>
 Home Page
+<br/>
 ![home](imgs/home.png)
+<br/>
 View Files
+<br/>
 ![files](/imgs/files.png)
+<br/>
 Right Click Menu
+<br/>
 ![functions](/imgs/menu.png)
+
+
