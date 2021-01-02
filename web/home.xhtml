@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>Home Page</title>
+        <ui:include src="header.xhtml"/>
+    </h:head>
+        <style type="text/css">
+        body{
+            /*background: #87CEEB;*/
+            background-image: url(resources/images/666.jpg);
+            background-size: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            /*width:350px;*/
+            margin: 0 auto;
+            margin-bottom: 0px;
+            width: 350px;
+            /*position: relative;*/
+            transition: all linear 1s;
+            opacity: 0;
+            left: -1000px;
+        }
+        .tp,.bt{
+            position: absolute;
+            width: 230px;
+            height: 2px;
+            background-color: #000;
+            left: 35%;
+            opacity: 0;
+            transform-origin: 0% 50%;
+            transform: scale(0);
+            transition: all 2s;
+        }
+        .tp{
+            top: 25px;
+        }
+        .bt{
+            transform-origin: 100% 50%;
+            left: 45%;
+        }
+        .content{
+            position:absolute;
+            opacity: 0;
+            transition: all 2s linear;
+            width: 300px;
+            /*margin: 200px auto;*/
+            left:50%;
+            top:230px;
+            margin-left:-150px;
+            z-index:10000;
+        }
+        .circle{
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -250px;
+            margin-top: -245px;
+            border-radius: 50%;
+        }
+        #big:before{
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 50%;
+            left: -10px;
+            transform-origin: 260px 0;
+            transform: rotateZ(0deg);
+            animation: go 7s linear infinite;
+        }
+        #lit{
+            width: 400px;
+            height: 400px;
+            margin-left: -200px;
+            margin-top: -200px;
+        }
+        #lit:before{
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 50%;
+            left: -10px;
+            transform-origin: 210px 0;
+            transform: rotateZ(180deg);
+            animation: down 7s linear infinite;
+        }
+        @keyframes go{
+            100%{
+                transform: rotateZ(360deg);
+            }
+        }
+        @keyframes down{
+            100%{
+                transform: rotateZ(-180deg);
+            }
+        }
+        </style>
+    <h:body >
+            <div class="tp hide"></div>
+            <h1 id="titl">Welcome To SUPFILE!</h1>
+            <div class="bt hide"></div>
+            <c:if test="#{userController.isLoggedIn()}">
+            <div class="content">
+                <h2 style="text-align: center"> Hello #{userController.username} ! </h2><br/>
+                <p> You can See Company <a href="about_us.html" >Introduction Here!</a></p>
+                <p> Or <h:link outcome="/all_files" >See All your files Here !</h:link></p>
+            </div>
+            </c:if>
+            <c:if test="#{!userController.isLoggedIn()}">
+            <div class="content">
+                <h2 style="text-align: center">Hello Stranger ! </h2><br/>
+                <p>Here is an <a href="about_us.html" >Introduction </a>of Our Company</p>
+                <p> You can <h:link outcome="/register">Register Here!</h:link>
+                    Or <h:link outcome="/login">Login Here!</h:link>
+                </p>
+            </div>
+            </c:if>
+            <div id="big" class="circle"></div>
+            <div id="lit" class="circle"></div>
+            <script type="text/javascript">
+                window.onload = function(){
+                    load();
+                    setTimeout(hide,1000);  
+                    setTimeout(contenthide,2000);
+                }
+                function load(){
+                    document.getElementById("titl").style.left = '0';
+                    document.getElementById("titl").style.opacity = '1';
+                }
+                function hide(){
+                    var hide = document.getElementsByClassName("hide");
+                    for(var i = 0 ; i &lt; hide.length ; i++){
+                        hide[i].style.opacity = '1';
+                        hide[i].style.transform = 'scale(1)';
+                    }
+                }
+                function contenthide(){
+                    var div = document.getElementsByClassName("content");
+                    for(var i = 0 ; i &lt; div.length ; i++){
+                        div[i].style.opacity = '1';
+                    }
+                }
+            </script>
+    </h:body>
+</html>

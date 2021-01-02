@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <style type="text/css">
+        #nav{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #nav li{
+            float: left;
+            width: 100px;
+            cursor: default;
+            color: #E4393C;
+            position: relative;
+            text-align: center;
+            height: 20px;
+            line-height: 20px;
+        }
+        #nav li:before{
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100px;
+            height: 1px;
+            background: black;
+            transform-origin: 100% 50%;
+            transform: scale(0);
+            transition: transform 1s;
+        }
+        #nav li:hover:before{
+            transform: scale(1);
+            transform-origin: 0% 50%;
+        }
+        #push,#push-bar{
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            transition: all .5s linear;
+        }
+        #push{
+            width: 100px;
+            background-color: #deab8a;
+        }
+        #push-bar{
+            left: 100px;    
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        li{
+            position: relative;
+            height: 80px;
+            line-height: 100px;
+            text-align: center;
+            text-shadow: 0 0 7px #E43937;
+        }
+        .bar{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 10px;
+            height: 60px;
+            background-color: #fedcbd;
+            margin-top: -30px;
+            line-height: 60px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: 0 0 10px #000;
+        }
+        .uname{
+            text-align: center;
+            /*float: right;*/
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            right:70px;
+            top:10px;
+            z-index: 100000;
+            /*            margin-top: 10px;
+                        margin-right: 70px;*/
+
+        }
+        .uname span.unamespan{
+            position: absolute;
+            right: 0px;
+            top: 8px;
+            border: 10px solid #ddd;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+        .uname li{
+            height: 20px;
+            line-height: 20px;
+            width: 125px;
+        }
+        .uname ul{
+            transition: all .5s linear;
+            height: 0px;
+        }
+        .files{
+            background-color: #deab8a;
+            height: 240px;
+            width: 100px;
+        }
+        .la{
+            text-decoration: none;
+            color: #9F0050;
+            font-size: 20px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .laq{
+            position:relative;
+            margin-top: 10%;
+            text-decoration: none;
+            color: #BF0060;
+            font-size: 23px;
+            /*font-weight: bold;*/
+            font-style: italic;
+            text-shadow: 0 0 10px #000;
+
+        }
+        .laa{
+            text-decoration: none;
+            color: #D9006C;
+            font-size: 16px;
+            font-weight: bold;
+            font-style: italic;
+
+        }
+        .isHide{
+            display: none;
+        }
+        .uname p.upro{
+            cursor: pointer;
+        }
+        .uname p.username{
+            color: #633216;
+            font-size: 19px;
+            text-shadow:0 0 10px #000;
+        }
+    </style>
+
+    <h:form>
+        <c:if test="#{userController.isLoggedIn()}">
+            <div class="uname">
+                <p class="username">#{userController.username}</p>
+                <span class="unamespan"></span>
+                <ul>
+                    <li><p class="upro">User Profile</p></li>
+                    <li><h:commandLink class="la" action="#{userController.logout()}" value="Logout" /></li>
+                </ul>
+            </div>
+            <div id="push">
+                <ul class="u">
+                    <li><p:link class="la" outcome="/home">Home</p:link></li>
+                    <li><h:commandLink class="la" action="#{fileController.gotoAll_FilesPage('all_files')}">Files</h:commandLink></li>
+                    <ul id="fileu" class="files">
+                        <li><h:commandLink class="laa" action="#{fileController.gotoAll_FilesPage('all_pics')}">Photos</h:commandLink></li>
+                        <li><h:commandLink class="laa" action="#{fileController.gotoAll_FilesPage('all_videos')}">Videos</h:commandLink></li>
+                        <li><h:commandLink class="laa" action="#{fileController.gotoAll_FilesPage('all_audios')}">Songs</h:commandLink></li>
+                    </ul>
+                    <!--以后用来看files的结构，先see all files-->
+                    <li><h:link class="la" outcome="/search_result">Search</h:link></li>
+                </ul>
+            </div>
+
+            <div id="push-bar">
+                <span class="bar">&lt;</span>
+            </div>
+        </c:if>
+
+
+        <c:if test="#{!userController.isLoggedIn()}">
+            <ul id="nav">
+                <li><h:link class="laq" outcome="home.xhtml">Home</h:link></li>
+                <li><h:link class="laq" outcome="login.xhtml">login</h:link></li>
+                <li><h:link class="laq" outcome="register.xhtml">register</h:link></li>
+            </ul>
+        </c:if>
+    </h:form>
+    <script type="text/javascript">
+        var bar = document.getElementsByClassName("bar")[0];
+        var push = document.getElementById("push");
+        var pushBar = document.getElementById("push-bar");
+        bar.onclick = function hide() {
+            if (this.innerText === "&lt;") {
+                push.style.width = "0";
+                pushBar.style.left = '0px';
+                this.innerHTML = "&gt;";
+            }
+            else {
+                push.style.width = "100px";
+                pushBar.style.left = '100px';
+                this.innerHTML = "&lt;";
+            }
+        };
+        var uname = document.getElementsByClassName("unamespan")[0];
+        uname.onmouseenter = function () {
+            this.style.borderTopColor = 'transparent';
+            this.style.borderBottomColor = '#ddd';
+            this.style.top = "-2px";
+            this.parentNode.style.backgroundColor = '#deab8a';
+            this.nextElementSibling.style.height = "60px";
+        };
+        uname.parentNode.onmouseleave = function () {
+            uname.style.borderTopColor = '#ddd';
+            uname.style.borderBottomColor = 'transparent';
+            uname.style.top = "8px";
+            this.style.backgroundColor = '';
+            uname.nextElementSibling.style.height = "0";
+        };
+        var files = document.getElementsByClassName("u")[0].children[1];
+        var filesList = document.getElementById("fileu");
+        files.onclick = function () {
+            if (filesList.className === "files") {
+                filesList.className = "files isHide";
+            }
+            else {
+                filesList.className = "files";
+            }
+        };
+    </script>
+</ui:composition>
+
+
+

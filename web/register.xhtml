@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>SUPCooking Register Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:include src="header.xhtml"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/login.css" />
+    </head>
+    <body>
+        <div id="grid">
+            <h:form>
+            <p>
+                <h:outputLabel class="lb" value="Username:" for="username" />
+                <h:inputText class="tt" id="username" value="#{userController.username}"/>
+            </p>
+            <p>
+                <h:outputLabel class="lb" value="Email:" for="email" />
+                <h:inputText class="tt" id="email" value="#{userController.email}" />
+            </p>
+            <p>
+                <h:outputLabel class="lb" value="Firstname:" for="firstname" />
+                <h:inputText class="tt" id="firstname" value="#{userController.firstname}" />
+            </p>
+            <p>
+                <h:outputLabel class="lb" value="Lastname:" for="lastname" />
+                <h:inputText class="tt" id="lastname" value="#{userController.lastname}" />
+            </p>
+            <p>
+                <h:outputLabel class="lb" value="Password:" for="password" />
+                <h:inputSecret class="tt" id="password" value="#{userController.password}" />
+            </p>
+            <p>
+                <h:outputLabel class="lb" value="Confirm Password:" for="passwordconfirm" />
+                <h:inputSecret class="tt" id="passwordconfirm" value="#{userController.passwordConfirm}" /> 
+                <h:commandButton class="but" action="#{userController.register()}" value="Register" />
+            </p>
+            </h:form>
+            <div>
+            <p:growl id="messageUser" showDetail="true" />
+            </div>
+            <c:if test="#{not empty userController.registerError}">
+                <p id="p">#{userController.registerError}</p>
+                <h:message for="p" errorClass="ERROR" showDetail="true" errorStyle="true" />
+            </c:if>
+        </div>
+        <script type="text/javascript" src="resources/js/login.js"></script>
+    </body>
+</html>

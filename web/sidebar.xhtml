@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+    <h:form>
+
+        <c:if test="#{userController.isLoggedIn()}">
+
+<!--            <div>
+                <p:sidebar widgetVar="sidebar1" baseZIndex="10000" rendered="true" visible="true" transient="false">
+                    <h1 style="font-weight:normal">Left Sidebar</h1>
+                    <h:commandLink action="#{fileController.gotoAll_FilesPage()}">Files</h:commandLink>
+                    <h:link outcome="/all_pics">Photos</h:link>
+                    <h:link outcome="/all_videos">Videos</h:link>
+                    <h:link outcome="/all_audios">Songs</h:link>
+                    
+                </p:sidebar>
+            </div>-->
+        </c:if>
+
+
+
+    </h:form>
+
+
+
+
+
+
+</ui:composition>
+

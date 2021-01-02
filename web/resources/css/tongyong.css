@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: "宋体";
+}
+
+/* 导航栏样式 */
+
+#nav {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 35px;
+    background: linear-gradient(#aaa,#ccc);
+    opacity: .7;
+}
+
+#nav>li {
+    float: right;
+    padding: 6px 12px;
+    background: #fff;
+    font-size: 12px;
+    border-radius: 15px;
+    margin-top: 2px;
+    margin-right: 20px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all .5s linear;
+}
+#nav>li:not(:last-child):hover{
+    background: #333;
+    color: #afa;
+}
+
+#nav>li:last-child {
+    float: left;
+    margin-left: 30px;
+}

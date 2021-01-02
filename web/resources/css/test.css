@@ -1,0 +1,82 @@
+/* 主页面样式 */
+#content{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+/* 右侧栏样式 */
+.formPage{
+	position: absolute;
+	z-index: 9999;
+	top: 10%;
+	bottom: 50%;
+	width: 400px;
+	background-color: #ddd;
+	right: -400px;
+	transition: all 1s linear;
+	opacity: 0;
+}
+.formIn{
+	right: 0;
+	opacity: .7;
+}
+.close{
+	position: absolute;
+	top: 0px;
+	padding: 0 5px;
+	border: 1px solid #000;
+	border-radius: 50%;
+	opacity: .5;
+	cursor: pointer;
+}
+.close:hover{
+	opacity: 1;
+}
+/* 表单样式 */
+.fm{
+	margin-top: 80px;
+}
+.fm input[type="submit"],.fm b{
+	float: left;
+	text-align: center;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	background: pink;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	cursor: pointer;
+	font-weight: normal;
+	font-size: 12px;
+}
+.fm input[type="submit"]{
+	margin-left: 130px;
+}
+.fm>p>span{
+	float: left;
+	width: 80px;
+	text-align: right;
+	margin-left: 80px;
+}
+.fm>p>i{
+	color: blue;
+	cursor: pointer;
+	position: relative;
+	font-size: 10px;
+	top: 10px;
+	left: 10px;
+}
+.fm>p:not(:first-child){
+	margin-top: 20px;	
+}
+.fm>p>input:not([type="submit"]){
+	border: 0;
+	width: 150px;
+	height: 25px;
+	border-radius: 6px;
+}

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>All File Page</title>
+        <style type="text/css">
+            body{
+                /*background: #87CEEB;*/
+                background-image: url(resources/images/555.jpg);
+                background-size: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .bold:hover{
+                font-weight: bold;
+            }
+            .blue:hover{
+                background-color: activecaption;
+            }
+
+            .ui-datatable tbody tr td{
+                border: 0;
+            }
+            .ui-datatable tbody tr td:last-child{
+                font-size: 12px;
+                color: #f6f5ec;
+                line-height: 50px;
+
+            }
+
+            .second{
+                font-size: 16px;
+                color: #f6f5ec;
+                line-height: 50px
+            }
+            .ui-widget-content{
+                background-color: #5e7c85;
+                border: 0;
+            }
+            .ui-datatable tbody tr td a{
+                color: #fffef9;
+            }
+            .ui-datatable tr.ui-widget-content:nth-of-type(odd){
+                background-color: #009ad6;
+            } 
+
+            .toTop{
+                margin-top: 80px;
+            }
+            #prof{
+                position: absolute;
+                display: none;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                background-color: rgba(55, 55, 55, .7);
+                z-index: 1000000;
+                overflow: hidden;
+            }
+            div.viewPro,div.editPro{
+                position: absolute;
+                width: 350px;
+                min-height: 300px;
+                top:200px;
+                left:50%;
+                margin-left: -175px;
+                background-color: #5e7c85;
+                transition: all 1s linear;
+            }
+            div.editPro{
+                top:170px;
+                left:-175px;
+                min-height: 420px;
+            }
+            .tt{
+                outline: none;
+                border-radius: 10px;
+                padding-left: 10px;
+                width: 140px;
+            }
+            span.editBut{
+                position:absolute;
+                width:100px;
+                height:30px;
+                text-align: center;
+                line-height: 30px;
+                border:1px solid #ddd;
+                border-radius: 8px;
+                bottom:15px;
+                left:50%;
+                margin-left: -50px;
+                background-color: skyblue;
+                cursor: pointer;
+
+            }
+            span.closeX{
+                position:absolute;
+                padding:5px 10px;
+                background-color: #fff;
+                left:50%;
+                margin-left:172px;
+                top:195px;
+                border-radius: 50%;
+                opacity: .6;
+                cursor: pointer;
+            }
+            .update{
+                border:1px solid #ddd;
+                border-radius: 8px;
+                background-color: skyblue;
+                cursor: pointer;
+                margin-left: 50px;
+            }
+            .ui-menu .ui-menuitem{
+                height: 30px;
+                line-height: 30px;
+                background-color: #fff;
+                color: #000;
+                margin: 0;
+                text-shadow: 0;
+            }
+            .ui-menu .ui-menuitem:hover{
+                background-color: #000;
+                color: #fff;
+            }
+            div.editPro>p label{
+                text-align: right;
+                padding-left: 20px;
+
+            }
+            div.editPro>p.email label{
+                padding-left: 40px;
+
+            }
+            #share{
+                position:absolute;
+                top:50%;
+                left:50%;
+                z-index:9999;
+            }
+
+
+        </style>
+
+        <ui:include src="header.xhtml"/>
+    </h:head>
+    <h:body>
+        <c:if test="#{fileController.showPage == 'upload'}" >
+            <div style="margin-left: 10%">
+                <h:form enctype="multipart/form-data">
+                    <p:growl id="messages" showDetail="true" />
+                    <p:fileUpload value="#{fileController.upfile}" mode="simple" />
+                    <br/><br/>
+                    <p:commandButton value="upload" ajax="false" action="#{fileController.uploadFile()}"/>
+                    <p:commandButton value="cancel" action="#{fileController.cancelUpload()}"/>
+                </h:form>
+            </div>
+        </c:if>
+
+
+
+        <c:if test="#{fileController.showPage =='all_files' }" >
+            <div style="height: 90%; width: 90%" id="iii"> 
+                <div>
+                    <p:dialog id="createFolerDialog" header="Create New Folder" modal="true" widgetVar="createFolerDialog" >
+                        <h:panelGrid >
+                            <h:form>
+                                <p:outputLabel for="foldername" value="Name:   " />
+                                <p:inputText id="foldername" label="foldername" value="#{fileController.addFolderName}" placeholder="New Folder"/><br/>
+                                <p:commandButton value="Add" action="#{fileController.addFolder()}" onclick="PF('createFolderDialog').hide()" />                           
+                                <p:commandButton value="Cancel" onclick="PF('createFolerDialog').hide()"/>
+                            </h:form>
+                        </h:panelGrid>
+                    </p:dialog>
+                </div>
+
+                <div style="margin-left: 10%" >
+                    <h:form>
+                        <p:commandButton id="new" value="New Folder" type="button" icon="fa fa-folder" onclick="PF('createFolerDialog').show()"/>
+                        <p:commandButton  value="Upload File" action="#{fileController.goto_upload()}" icon="fa fa-cloud-upload" />
+                    </h:form>
+                </div>
+                <div id="table" style="margin-top: 40px;" >
+                    <p:growl id="message" showDetail="true" />
+                    <p:growl id="share" sticky="true" showDetail="true" rendered="#{fileController.showSharePage}" />
+                    <h:form id="dataform" >  
+                        <p:contextMenu>
+                            <p:menuitem style="display:none">
+                                <h:commandLink class="bold" value="Paste" action="#{fileController.paste()}" style="text-decoration:none;" />
+                            </p:menuitem> 
+                        </p:contextMenu>
+                        <p:dataTable id="allfiles" value="#{fileController.fileList}" var="myFile" stickyHeader="true" editable="true" editMode="cell" scrollable="true" scrollHeight="400" widgetVar="cellFiles" style="width: 85%;margin-left: 10% ; ">
+                            <!--<paginator="true" rows="12" paginatorPosition="bottom" >-->
+
+                            <f:facet name="header" id="header">
+                                <div style="position: relative">
+                                    <p:commandLink value="←back" action="#{fileController.back()}" style="position: absolute; left: 1px ;background: transparent;border: transparent;text-decoration:none;" />
+                                    <h:outputText id="parent" value="#{fileController.currentFolder}" style=" font-weight: bold; font-size: 20px"/> 
+                                </div>
+                            </f:facet>
+
+                            <p:column id="column" headerText="Name">
+                                <!--<p></p>-->
+                                <h:inputText id="input" value="#{fileController.re_name}" rendered="#{myFile.editable}" />
+                                <h:commandButton id="filein" action="#{fileController.confirmRanme(myFile)}" rendered="#{myFile.editable}" value="confirm"/>
+
+                                <h:commandLink id="fileout" class="bold" action="#{fileController.enter(myFile)}" rendered="#{not myFile.editable}" style="text-decoration:none;" >           
+                                    <h:outputText value="#{myFile.myfilename}" rendered="#{not myFile.editable}" />
+                                </h:commandLink>
+
+                                <p:contextMenu for="fileout">
+
+                                    <p:menuitem style="display:none" >
+                                        <h:commandLink class="bold" value="Copy" action="#{fileController.copy(myFile)}" style="text-decoration:none;"/>
+                                    </p:menuitem>
+                                    <p:menuitem style="display:none" >
+                                        <h:commandLink class="bold" value="Cut" action="#{fileController.cut(myFile)}" style="text-decoration:none;"/>
+                                    </p:menuitem>
+                                    <p:menuitem style="display:none">
+                                        <h:commandLink id="cdl1" class="bold" value="Rename" action="#{fileController.rename(myFile)}" style="text-decoration:none;" />
+                                    </p:menuitem>
+                                    <p:menuitem style="display:none" >
+                                        <h:commandLink class="bold" value="Delete" action="#{fileController.delete(myFile)}" style="text-decoration:none;" /> 
+                                    </p:menuitem> 
+                                    <p:menuitem style="display:none" >
+                                        <h:commandLink class="bold" value="Download" action="#{fileController.downloadFile(myFile)}" style="text-decoration:none;"/>
+                                    </p:menuitem>
+                                    <p:menuitem style="display:none">
+                                        <h:commandLink class="bold" value="Share" action="#{fileController.share(myFile)}" style="text-decoration:none;"/>
+                                    </p:menuitem>
+
+                                </p:contextMenu>
+
+                            </p:column>
+
+                            <p:column headerText="Size" >
+                                <p></p>
+                                <h:outputText class="second" value="#{myFile.sizeString}" />
+                            </p:column>
+
+                            <p:column headerText="Date">
+                                <p></p>
+                                <h:outputText value="#{myFile.dataAdded}" />
+                            </p:column>
+
+                            <f:facet name="footer">
+                                In total there are #{fileController.fileList.size()} files in #{fileController.currentFolder}.
+                            </f:facet>
+
+                        </p:dataTable>
+
+                    </h:form>
+                </div>
+
+            </div>
+        </c:if>
+
+        <c:if test="#{fileController.showPage =='all_pics' }" >
+            <div id="all_pics" class="toTop">
+                <h:form id="picsform">
+                    <p:dataTable id="allpics" value="#{fileController.pictureList}" var="pic" stickyHeader="true" scrollable="true" scrollHeight="360" widgetVar="cellPic" style="width: 80%;margin-left: 10% ; ">
+                        <f:facet name="header">
+                            My Photos
+                        </f:facet>
+
+                        <p:column id="column" headerText="Name">
+                            <p></p>
+                            <h:commandLink id="fileout" class="bold" action="#{fileController.enter(pic)}" style="text-decoration:none;">           
+                                <h:outputText value="#{pic.myfilename}"/>
+                            </h:commandLink>
+                        </p:column>
+
+                        <p:column headerText="Size" >
+                            <p></p>
+                            <h:outputText class="second" value="#{pic.sizeString}" />
+                        </p:column>
+
+                        <p:column headerText="Date">
+                            <p></p>
+                            <h:outputText value="#{pic.dataAdded}" />
+                        </p:column>
+
+                        <f:facet name="footer">
+                            In total there are #{fileController.pictureList.size()} files in Pictures.
+                        </f:facet>
+
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </c:if>
+
+
+        <c:if test="#{fileController.showPage == 'all_audios'}" >
+            <div class="toTop">
+                <h:form id="audiosform"> 
+
+                    <p:dataTable id="allsongs" value="#{fileController.audioList}" var="song" stickyHeader="true" scrollable="true" scrollHeight="430" widgetVar="cellSong" style="width: 80%;margin-left: 10% ; ">
+
+                        <f:facet name="header" >
+                            My Songs
+                        </f:facet>
+
+                        <p:column id="column" headerText="Name">       
+                            <p></p>
+                            <h:commandLink id="fileout" class="bold" action="#{fileController.enter(song)}" style="text-decoration:none;">           
+                                <h:outputText value="#{song.myfilename}"/>
+                            </h:commandLink>
+                        </p:column>
+
+                        <p:column headerText="Size" >
+                            <p></p>
+                            <h:outputText class="second" value="#{song.sizeString}" />
+                        </p:column>
+
+                        <p:column headerText="Date">
+                            <p></p>
+                            <h:outputText value="#{song.dataAdded}" />
+                        </p:column>
+
+                        <f:facet name="footer">
+                            In total there are #{fileController.audioList.size()} files in Songs.
+                        </f:facet>
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </c:if>
+
+
+
+        <c:if test="#{fileController.showPage == 'all_videos'}" >
+            <div class="toTop">
+                <h:form id="videosform">
+                    <p:dataTable id="allvideos" value="#{fileController.videoList}" var="video" stickyHeader="true" scrollable="true" scrollHeight="360" widgetVar="cellVideo" style="width: 80%;margin-left: 10% ; " >
+                        <f:facet name="header" >
+                            My Videos
+                        </f:facet>
+
+                        <p:column id="column" headerText="Name" >
+                            <p></p>
+                            <h:commandLink class="bold" action="#{fileController.enter(video)}" style="text-decoration:none;">           
+                                <h:outputText value="#{video.myfilename}"/>
+                            </h:commandLink>
+                        </p:column>
+
+                        <p:column headerText="Size" >
+                            <p></p>
+                            <h:outputText class="second" value="#{video.sizeString}" />
+                        </p:column>
+
+                        <p:column headerText="Date">
+                            <p></p>
+                            <h:outputText value="#{video.dataAdded}" />
+                        </p:column>
+
+                        <f:facet name="footer">
+                            In total there are #{fileController.videoList.size()} files in Videos.
+                        </f:facet>
+
+                    </p:dataTable>
+                </h:form>
+            </div>
+        </c:if>
+
+        <!--<c:if test="#{userController.showPage == 'user_profile'}" >-->
+        <div id="prof">
+            <span class="closeX">X</span>
+            <h:form id="form">
+                <!--<c:if test="#{!userController.show}" >-->
+                <div class="viewPro">
+                    <h3>View User Profile</h3><br/>
+                    <h:outputLabel class="lb" value="User Name :" />
+                    <h:outputText class="tt" value="#{userController.user.username}" /><br/><br/>
+                    <h:outputLabel class="lb" value="First Name:"  />
+                    <h:outputText class="tt" value="#{userController.user.firstname}" /><br/><br/>
+                    <h:outputLabel class="lb" value="Last Name :"  />
+                    <h:outputText class="tt" value="#{userController.user.lastname}" /><br/><br/>
+                    <h:outputLabel class="lb" value="Email:"  />
+                    <h:outputText class="tt" value="#{userController.user.email}" /><br/><br/>
+                    <span id="editBut" class="editBut">edit</span>
+                </div>
+                <!--</c:if>-->
+
+
+                <div class="editPro">
+                    <h3>Edit User Profile</h3><br/>
+                    <!--<h:outputText class="uperr" value="#{userController.updateError}" />-->
+                    <p><h:outputLabel value="User Name :" />
+                        <p:inputText  value="#{userController.username}" /></p>
+                    <p><h:outputLabel value="First Name:"  />
+                        <p:inputText value="#{userController.firstname}"/></p>
+                    <p><h:outputLabel value="Last Name :"  />
+                        <p:inputText value="#{userController.lastname}"/></p>
+                    <p class="email"><h:outputLabel value="Email     :"  />
+                        <p:inputText value="#{userController.email}"/></p>
+                    <p><h:outputLabel value="Password  :" />
+                        <p:password value="#{userController.password}"/></p>
+                    <p><h:outputLabel value="Confirm   :" />
+                        <p:password value="#{userController.passwordConfirm}"/></p>
+                    <p:commandButton action="#{userController.confirmUpdate()}" value="confirm" class="update"/>
+                    <p:commandButton action="#{userController.cancelUpdate()}" value="cancel" class="update"/>
+                    <!--<span class="editBut" style="margin-left:30px;">cancel</span>-->
+                    <!--<h:outputText class="uperr" value="#{userController.updateError}" />-->
+                </div>
+
+
+            </h:form>
+            <!--<h:outputText class="uperr" value="#{userController.updateError}" />-->
+        </div>
+        <!--</c:if>-->
+        <script type="text/javascript">
+            var upro = document.getElementsByClassName("upro")[0];
+            upro.onclick = function () {
+                document.getElementById("prof").style.display = 'block';
+            }
+            document.getElementById("editBut").onclick = function () {
+                var viewPro = document.getElementsByClassName("viewPro")[0];
+                var editPro = document.getElementsByClassName("editPro")[0];
+                viewPro.style.left = '-175px';
+                editPro.style.left = '50%';
+            }
+            document.getElementsByClassName("closeX")[0].onclick = function () {
+                this.parentNode.style.display = 'none';
+            }
+            document.getElementsByClassName("editBut")[1].onclick = function () {
+                document.getElementById("prof").style.display = 'none';
+            }
+//            document.getElementsByClassName("update")[0].onclick = function(){
+//                var forms = document.getElementById("form");
+//                if(!forms.form:j_idt80.value){
+//                    window.alert("aaaaaaa");
+//                }
+//            }
+        </script>
+    </h:body>
+</html>

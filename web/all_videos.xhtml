@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>All Videos Page</title>
+        <style type="text/css">
+            .bold:hover{
+                font-weight: bold;
+            }
+        </style>
+        <ui:include src="header.xhtml"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable id="allvideos" value="#{fileController.videoList}" var="video" stickyHeader="true" scrollable="true" scrollHeight="360" widgetVar="cellVideo" style="width: 80%;margin-left: 10% ; " >
+            <f:facet name="header" >
+                My Videos
+            </f:facet>
+
+            <p:column id="column" >
+                <p></p>
+                <h:commandLink class="bold" action="#{fileController.enter('all_videos', video)}" style="text-decoration:none;">           
+                    <h:outputText value="#{video.myfilename}"/>
+                </h:commandLink>
+
+            </p:column>
+
+
+            <f:facet name="footer">
+                In total there are #{fileController.videoList.size()} files in Videos.
+            </f:facet>
+            
+        </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

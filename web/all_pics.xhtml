@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>All Pictures Page</title>
+        <style type="text/css">
+            .bold:hover{
+                font-weight: bold;
+            }
+        </style>
+        <ui:include src="header.xhtml"/>
+    </h:head>
+    <h:body>
+        <h:form>
+        <p:dataTable id="allpics" value="#{fileController.pictureList}" var="pic" stickyHeader="true" scrollable="true" scrollHeight="360" widgetVar="cellPic" style="width: 80%;margin-left: 10% ; ">
+            <f:facet name="header" >
+                My Photos
+            </f:facet>
+
+            <p:column id="column" >
+                <p></p>
+                <h:commandLink id="fileout" class="bold" action="#{fileController.enter('all_pics', pic)}" style="text-decoration:none;">           
+                    <h:outputText value="#{pic.myfilename}"/>
+                </h:commandLink>
+
+            </p:column>
+
+
+            <f:facet name="footer">
+                In total there are #{fileController.pictureList.size()} files in Pictures.
+            </f:facet>
+            
+        </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

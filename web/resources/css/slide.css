@@ -1,0 +1,63 @@
+img{
+	width: 100%;
+}
+.main_div{
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.ul_img{
+	width: 6000px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	transition: all 2s linear;
+}
+
+.ul_img li{
+	width: 1280px;
+	float: left;
+}
+div.arrow{
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+	margin-top: 300px;
+}
+
+span.arrow{
+	font-size: 3em;
+	line-height: 2em;
+	color: seashell;
+	padding: 0 .5em;
+}
+.arrow span:hover{
+	cursor: pointer;
+	border-radius: 50%;
+	background-color: rgba(192, 192, 192, .29)
+}
+.btns{
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+	margin-top: 630px;
+}
+.div_btn{
+	float: left;
+	border-radius: 100%;
+	background-color: aquamarine;
+	width: 60px;
+	height: 10px;
+	margin-left: 20px;
+}
+.btns>div:first-child{
+	margin-left: 450px;
+	background-color: aqua;
+}
+.div_btn:hover{
+	background-color: aqua;
+	cursor: pointer;
+}

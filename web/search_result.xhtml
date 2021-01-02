@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <h:head>
+        <title>Search Result Page</title>
+        <style type="text/css">
+            body{
+                /*background: #87CEEB;*/
+                background-image: url(resources/images/555.jpg);
+                background-size: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            .bold:hover{
+                font-weight: bold;
+            }
+        </style>
+        <ui:include src="header.xhtml"/>
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <div style="margin-left: 10%">
+                <h1>Search Your File Here </h1><br/>
+                <p:inputText value="#{fileController.searchText}" />
+                <p:commandButton icon="fa fa-search" action="#{fileController.search()}" />
+            </div>
+
+            <p:dataTable value="#{fileController.searchResult}" var="search" stickyHeader="true" scrollable="true" scrollHeight="360" widgetVar="cellSearch" style="width: 80%;margin-left: 10% ; ">
+
+                <!--                <f:facet name="header" >
+                </f:facet>-->
+
+                <p:column id="column" >
+                    <p></p>
+                    <h:commandLink id="fileout" class="bold" action="#{fileController.enter(search)}" style="text-decoration:none;">           
+                        <h:outputText value="#{search.myfilerelativepath}"/>
+                    </h:commandLink>
+
+                </p:column>
+
+                <p:column >
+                    <p></p>
+                    <h:outputText value="#{search.sizeString}" />
+                </p:column>
+
+                <p:column >
+                    <p></p>
+                    <h:outputText value="#{search.dataAdded}" />
+                </p:column>
+
+
+                <f:facet name="footer">
+                    In total there are #{fileController.searchResult.size()} files in Search Result.
+                </f:facet>
+
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

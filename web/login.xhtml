@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <head>
+        <title>SUPFile Login Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <ui:include src="header.xhtml"/>
+        <link rel="stylesheet" type="text/css" href="resources/css/login.css" />
+    </head>
+    <body>
+        <div id="grid">
+            <h:form>
+                <p>
+                    <h:outputLabel class="lb" value="Username:" for="username" />
+                    <h:inputText class="tt" id="username" value="#{userController.username}" />
+                </p>
+                <p>
+                    <h:outputLabel class="lb" value="Password:" for="password" />
+                    <h:inputSecret class="tt" id="password" value="#{userController.password}" />
+                </p>
+                <h:commandButton class="but" action="#{userController.login()}" value="Login" />
+            </h:form>
+            <c:if test="#{not empty userController.loginError}">
+
+                <c:if test="#{userController.loginError == 'User not exists, Please Register first!'}" >
+                    
+                    <h:link class="reg" value="Register" outcome="register.xhtml"></h:link><br/>
+                </c:if>
+                <p>#{userController.loginError}</p>
+            </c:if>
+        </div>
+        <script type="text/javascript" src="resources/js/login.js"></script>
+    </body>
+</html>

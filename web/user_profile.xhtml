@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>User Profile Page</title>
+
+        <ui:include src="header.xhtml"></ui:include>
+    </h:head>
+    <h:body>      
+
+        <!--<p:growl id="growlmessage" showDetail="true" />-->
+        <!--<h:message for="form" showDetail="true" />-->
+        <h1>User Profile Page</h1><br/><br/>
+        <h:form id="form">
+            <c:if test="#{!userController.show}" >
+                <h:outputLabel value="User Name :" />
+                <h:outputText value="#{userController.user.username}" /><br/><br/>
+                <h:outputLabel value="First Name:"  />
+                <h:outputText value="#{userController.user.firstname}" /><br/><br/>
+                <h:outputLabel value="Last Name :"  />
+                <h:outputText value="#{userController.user.lastname}" /><br/><br/>
+                <h:outputLabel value="Email     :"  />
+                <h:outputText value="#{userController.user.email}" /><br/><br/>
+                <h:commandButton type="submit" value="update" action="#{userController.update()}"/>
+
+            </c:if>
+
+            <c:if test="#{userController.show}" >
+                <h:outputLabel value="User Name :" />
+                <h:inputText value="#{userController.username}" /><br/><br/>
+                <h:outputLabel value="First Name:"  />
+                <h:inputText value="#{userController.firstname}" /><br/><br/>
+                <h:outputLabel value="Last Name :"  />
+                <h:inputText value="#{userController.lastname}" /><br/><br/>
+                <h:outputLabel value="Email     :"  />
+                <h:inputText value="#{userController.email}" /><br/><br/>
+                <h:outputLabel value="Password  :" />
+                <h:inputSecret value="#{userController.password}" /><br/><br/>
+                <h:outputLabel value="Confirm   :" />
+                <h:inputSecret value="#{userController.passwordConfirm}" /><br/><br/>
+                <p:commandButton action="#{userController.confirmUpdate()}" value="confirm" />
+                <h:commandButton action="#{userController.cancelUpdate()}" value="cancel"/>
+            </c:if>
+
+        </h:form>
+        <p>#{userController.updateError}</p>
+    </h:body>
+</html>
