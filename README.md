@@ -1,3 +1,4 @@
+![](imgs/logo.png)
 # Cloud Drive
 
 <p>This website includes 3 main systems:  Storage system, User Registration, File System and File System. </p>
@@ -14,7 +15,7 @@ Backend: Java Server Faces framework on Glassfish, Frontend: PrimeFaces library,
 ![techniques](/imgs/stack.png)
 
 <p>Model: MVC</p>
-![code](/imgs/Picture1.png)
+![code](imgs/Picture1.png)
 <br/>
 
 Architecture
