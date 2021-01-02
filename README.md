@@ -11,18 +11,22 @@
 Techniques
 --------------
 Backend: Java Server Faces framework on Glassfish, Frontend: PrimeFaces library, Database: MySql
+![techniques](/imgs/stack.png)
 
-Front-end and Android application communicate with backend through RESTful APIs. Model: MVC
+<p>Model: MVC</p>
+![code](/imgs/Picture1.png)
 <br/>
 
 Architecture
 ------------
 High availability for glassfish cluster, web clients and storage servers, iSCSI based storage
-![arc]()
+![arc](/imgs/arc.png)
 <br/>
 
 Web APIS
 ------------
+<p>Front-end and Android application communicate with backend through RESTful APIs.</p>
+
 **User services**
 <br/>
 Register :  POST    /rest/auth/register
@@ -41,5 +45,10 @@ Rename  :  POST  /rest/files/{username}/rename
 
 Preview
 ------------
+![register](imgs/register.png)
+![login](imgs/login.png)
+![home](imgs/home.png)
+![files](/imgs/files.png)
+![functions](/imgs/menu.png)
 
 
