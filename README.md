@@ -17,7 +17,7 @@ Backend: Java Server Faces framework on Glassfish, Frontend: PrimeFaces library,
 
 <br/>
 Model: MVC
-<br/>
+
 ![code](imgs/Picture1.png)
 <br/>
 
