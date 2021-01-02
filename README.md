@@ -1,3 +1,4 @@
+![](imgs/logo.png)
 # Cloud Drive
 
 <p>This website includes 3 main systems:  Storage system, User Registration, File System and File System. </p>
@@ -29,26 +30,76 @@ Web APIS
 
 **User services**
 <br/>
-Register :  POST    /rest/auth/register
-Login  :   POST /rest/auth/login
-Logout  :  GET /rest/auth/logout/{username}
+<table>
+    <tr>
+        <th>Function</th>
+        <th>HTTP Method</th>
+        <th>Endpoint</th>
+    </tr>
+    <tr>
+        <td>Register</td>
+        <td>POST</td>
+        <td>/rest/auth/register</td>
+    </tr>
+    <tr>
+        <td>Login</td>
+        <td>POST</td>
+        <td>/rest/auth/login</td>
+    </tr>
+    <tr>
+        <td>Logout</td>
+        <td>GET</td>
+        <td>/rest/auth/logout/{username}</td>
+    </tr>
+</table>
+
 <br/>
 <br/>
 
 **File services**
-getFileByName :   GET   rest/files/{username}/getFile
-Upload File :  POST /rest/files/{username} /uploadTo/{folderId}
-Download  :  GET  /rest/files/{username} /download/ {fileId}
-addFolder : POST  /rest/files/{username}/addFolder
-Rename  :  POST  /rest/files/{username}/rename
+<table>
+    <tr>
+        <th>Function</th>
+        <th>HTTP Method</th>
+        <th>Endpoint</th>
+    </tr>
+    <tr>
+        <td>getFileByName</td>
+        <td>GET</td>
+        <td>rest/files/{username}/getFile</td>
+    </tr>
+    <tr>
+        <td>Upload File</td>
+        <td>POST</td>
+        <td>/rest/files/{username} /uploadTo/{folderId}</td>
+    </tr>
+    <tr>
+        <td>Download</td>
+        <td>GET</td>
+        <td>/rest/files/{username} /download/ {fileId}</td>
+    </tr>
+    <tr>
+        <td>addFolder</td>
+        <td>POST</td>
+        <td>/rest/files/{username}/addFolder</td>
+    </tr>
+    <tr>
+        <td>Rename</td>
+        <td>POST</td>
+        <td>/rest/files/{username}/rename</td>
+    </tr>
+</table>
+
 <br/>
 
 Preview
 ------------
+User Register
 ![register](imgs/register.png)
 ![login](imgs/login.png)
+Home Page
 ![home](imgs/home.png)
+View Files
 ![files](/imgs/files.png)
+Right Click Menu
 ![functions](/imgs/menu.png)
-
-
