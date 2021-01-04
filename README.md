@@ -97,9 +97,7 @@ Web APIS
 
 Preview
 ------------
-User Register
-<br/>
-![register](imgs/register.png)
+User Logon
 <br/>
 ![login](imgs/login.png)
 <br/>
