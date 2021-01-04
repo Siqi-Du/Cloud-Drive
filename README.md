@@ -97,7 +97,7 @@ Web APIS
 
 Preview
 ------------
-User Logon
+User Login
 <br/>
 ![login](imgs/login.png)
 <br/>
